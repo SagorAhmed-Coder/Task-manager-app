@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/ui/screen/add_new_task_screen.dart';
 import 'package:task_manager/ui/screen/forgot_password_email_screen.dart';
 import 'package:task_manager/ui/screen/forgot_password_verify_opt_screen.dart';
 import 'package:task_manager/ui/screen/main_bottom_nav_bar.dart';
@@ -6,6 +7,7 @@ import 'package:task_manager/ui/screen/reset_password_screen.dart';
 import 'package:task_manager/ui/screen/sign_in_screen.dart';
 import 'package:task_manager/ui/screen/sign_up_screen.dart';
 import 'package:task_manager/ui/screen/splash_screen.dart';
+import 'package:task_manager/ui/screen/update_profile_screen.dart';
 
 class TaskManagerApp extends StatelessWidget {
   const TaskManagerApp({super.key});
@@ -64,6 +66,8 @@ class TaskManagerApp extends StatelessWidget {
         ForgotPasswordVerifyOptScreen.name : (context) => ForgotPasswordVerifyOptScreen(),
         ResetPasswordScreen.name : (context) => ResetPasswordScreen(),
         MainBottomNavBar.name : (context) => MainBottomNavBar(),
+        AddNewTaskScreen.name : (context) => AddNewTaskScreen(),
+        UpdateProfileScreen.name : (context) => UpdateProfileScreen(),
       },
     );
   }

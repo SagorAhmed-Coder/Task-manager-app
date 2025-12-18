@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/ui/screen/add_new_task_screen.dart';
 import '../utils/task_card.dart';
 
 class NewTaskListScreen extends StatefulWidget {
@@ -13,7 +14,7 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
-      floatingActionButton: FloatingActionButton(onPressed: (){},child: Icon(Icons.add),),
+      floatingActionButton: FloatingActionButton(onPressed: goNewTaskListScreen,child: Icon(Icons.add),),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -33,7 +34,9 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
     );
   }
 
-
+  void goNewTaskListScreen(){
+    Navigator.pushNamed(context, AddNewTaskScreen.name);
+  }
 
 
   Padding _buildTaskSummaryListView() {
