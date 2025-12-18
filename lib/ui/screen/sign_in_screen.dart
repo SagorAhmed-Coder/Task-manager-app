@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager/ui/screen/forgot_password_email_screen.dart';
+import 'package:task_manager/ui/screen/main_bottom_nav_bar.dart';
 import 'package:task_manager/ui/screen/sign_up_screen.dart';
 import 'package:task_manager/ui/utils/screen_background.dart';
 
@@ -78,7 +79,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void _onTapSignInButton(){
-
+    Navigator.pushReplacementNamed(context, MainBottomNavBar.name,);
   }
   void _onTapForgotPasswordButton(){
     Navigator.pushNamed(context, ForgotPasswordEmailScreen.name);
