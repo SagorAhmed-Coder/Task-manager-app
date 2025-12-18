@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:task_manager/ui/utils/my_app_bar.dart';
 import 'package:task_manager/ui/utils/screen_background.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
@@ -15,6 +16,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: MyAppBar(
+        fromUpdateProfile: true,
+      ),
       body: ScreenBackground(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -27,37 +31,38 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 'Update Profile',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
+              Container(
+                height: 50,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 50,
+                      width: 90,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(8),bottomLeft: Radius.circular(8)),
+                      ),
+                      child: Center(child: Text('Photos',style: TextStyle(color: Colors.white),),),
+                    ),
+                    const SizedBox(width: 10,),
+                    Text('select photos',style: TextStyle(color: Colors.grey,fontWeight: FontWeight.w400),)
+                  ],
+                ),
+              ),
               TextField(decoration: InputDecoration(hintText: 'Email')),
               TextField(decoration: InputDecoration(hintText: 'First name')),
               TextField(decoration: InputDecoration(hintText: 'Last name')),
               TextField(decoration: InputDecoration(hintText: 'Mobile')),
               TextField(decoration: InputDecoration(hintText: 'Password')),
               FilledButton(
-                  onPressed: _onTapSignUpButton,
+                  onPressed: _onTapUpdateButton,
                   child: Text('update Profile')),
               const SizedBox(height: 16,),
-              Center(
-                child: RichText(
-                    text:TextSpan(
-                      style: TextStyle(
-                        color: Colors.black,
-                        letterSpacing:3,
-                      ),
-                      text: 'Already have an account? ',
-                      children: [
-                        TextSpan(
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          text: 'Sign In',
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = _onTapSingInButton,
-                        )
-                      ]
-                    ),
-                ),
-              ),
             ],
           ),
         ),
@@ -65,11 +70,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     );
   }
 
-  void _onTapSignUpButton(){
+  void _onTapUpdateButton(){
 
   }
 
-  void _onTapSingInButton(){
-    Navigator.pop(context);
-   }
 }
