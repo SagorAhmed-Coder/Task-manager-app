@@ -4,7 +4,7 @@ import 'dart:convert';
 
 class NetworkCaller {
   //get request
-  Future<NetworkResponse> getRequest(String url) async {
+ static Future<NetworkResponse> getRequest(String url) async {
     try {
       Uri uri = Uri.parse(url);
       _logRequest(url);
@@ -21,6 +21,7 @@ class NetworkCaller {
         return NetworkResponse(
           isSuccess: false,
           responseCode: response.statusCode,
+          errorMessage: decodedData['data'],
         );
       }
     } catch (e) {
@@ -33,18 +34,18 @@ class NetworkCaller {
   }
 
   //post request
-  Future<NetworkResponse> postRequest(
+ static Future<NetworkResponse> postRequest(
     String url,
-    Map<String, dynamic>? body,
+     {Map<String, dynamic>? body}
   ) async {
     try{
       Uri uri = Uri.parse(url);
-      _logRequest(url,body: body);
       Response response = await post(
         uri,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(body),
       );
+      _logResponse(url, response);
       final decodedData = jsonDecode(response.body);
       if(response.statusCode == 200){
         return NetworkResponse(
@@ -56,6 +57,7 @@ class NetworkCaller {
         return NetworkResponse(
           isSuccess: false,
           responseCode: response.statusCode,
+          errorMessage: decodedData['data'],
         );
       }
     }catch(e){
@@ -67,12 +69,12 @@ class NetworkCaller {
     }
   }
 
-  void _logRequest(String url, {Map<String, dynamic>? body}) {
+  static void _logRequest(String url, {Map<String, dynamic>? body}) {
     debugPrint("Url: $url\n"
     "body: $body");
   }
 
-  void _logResponse(String url, Response response) {
+ static void _logResponse(String url, Response response) {
     debugPrint(
       'Url: $url\n'
       'Status code: ${response.body}\n'
@@ -85,12 +87,12 @@ class NetworkResponse {
   final bool isSuccess;
   final int responseCode;
   final dynamic body;
-  final String? errorMessage;
+  final String errorMessage;
 
   NetworkResponse({
     required this.isSuccess,
     required this.responseCode,
     this.body,
-    this.errorMessage,
+    this.errorMessage = 'Something went wrong',
   });
 }
