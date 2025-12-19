@@ -1,0 +1,39 @@
+import 'package:flutter/cupertino.dart';
+
+class UserModel {
+  final String id;
+  final String email;
+  final String firstName;
+  final String lastName;
+  final String mobile;
+
+  UserModel({
+    required this.id,
+    required this.email,
+    required this.firstName,
+    required this.lastName,
+    required this.mobile,
+  });
+
+
+  //json -- data class
+ factory UserModel.fromJson(Map<String,dynamic> jsonData){
+    return UserModel(
+        id: jsonData['_id'],
+        email: jsonData['email'],
+        firstName: jsonData['firstName'],
+        lastName:jsonData['lastName'],
+        mobile: jsonData['mobile'],
+    );}
+
+  //data class - json
+  Map<String,dynamic> toJson(){
+   return {
+     "_id":id,
+     "email":email,
+     "firstName":firstName,
+     "lastName":lastName,
+     "mobile":mobile,
+   };
+  }
+}

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:task_manager/data/controller/auth_controller.dart';
+import 'package:task_manager/ui/screen/sign_in_screen.dart';
 import 'package:task_manager/ui/screen/update_profile_screen.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
@@ -15,6 +17,14 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.green,
+      leading: null,
+     // automaticallyImplyLeading: false,
+      actions: [
+        IconButton(onPressed: () async {
+         await AuthController.clearUserData();
+         Navigator.pushNamedAndRemoveUntil(context, SignInScreen.name, (route) => true,);
+        }, icon: Icon(Icons.logout,color: Colors.white,)),
+      ],
       title: GestureDetector(
         onTap: () {
           if(fromUpdateProfile){
@@ -23,16 +33,16 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
           Navigator.pushNamed(context, UpdateProfileScreen.name);
         },
         child: Row(
-          spacing: 12,
+          spacing: 5,
           children: [
-            CircleAvatar(backgroundColor: Colors.white,radius: 25,),
+            CircleAvatar(backgroundColor: Colors.white,radius: 24,),
             Padding(
-              padding: const EdgeInsets.only(bottom: 15),
+              padding: const EdgeInsets.only(bottom: 3),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Rahman Ali',style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white,fontSize: 23),),
-                  Text('sagorahmedyt07yt@gmail.com',style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),),
+                  Text('Rahman Ali',style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white,fontSize: 20),),
+                  Text('sagorahmedyt07@gmail.com',style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),),
                 ],
               ),
             )
