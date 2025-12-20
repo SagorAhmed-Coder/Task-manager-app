@@ -18,7 +18,7 @@ class _CancelledTaskListScreenState extends State<CancelledTaskListScreen> {
           shrinkWrap: true,
           itemCount: 20,
           itemBuilder: (context, index) {
-            return TaskCard();
+            //return TaskCard();
           },
         )
     );

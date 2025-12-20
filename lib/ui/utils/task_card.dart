@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/data/model/task_model.dart';
 
 
 class TaskCard extends StatelessWidget {
   const TaskCard({
     super.key,
+    required this.taskModel,
   });
+
+  final TaskModel taskModel;
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +20,12 @@ class TaskCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(6),
         ),
         child: ListTile(
-          title: Text('List of task',style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 25),),
+          title: Text(taskModel.tile,style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 25),),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Description of the task'),
-              Text('Date: 12 june 2022'),
+              Text(taskModel.description),
+              Text('Date: ${taskModel.createdDate}'),
               Row(
                 children: [
                   Container(
@@ -30,7 +34,7 @@ class TaskCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     padding: EdgeInsets.symmetric(vertical: 5,horizontal: 10),
-                    child: Text('New',style: TextStyle(color: Colors.white,fontSize: 17),),
+                    child: Text(taskModel.status,style: TextStyle(color: Colors.white,fontSize: 17),),
                   ),
                   Spacer(),
                   IconButton(onPressed: (){}, icon: Icon(Icons.delete)),

@@ -111,7 +111,7 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
     }
   }
 
-  //clear textfield
+  //clear text field
   void clearTextField(){
     _titleController.clear();
     _descriptionController.clear();

@@ -18,7 +18,7 @@ class _DoneProgressListScreenState extends State<DoneProgressListScreen> {
           shrinkWrap: true,
           itemCount: 20,
           itemBuilder: (context, index) {
-            return TaskCard();
+           // return TaskCard();
           },
         )
     );
