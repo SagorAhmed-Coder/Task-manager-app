@@ -21,7 +21,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
   final List<Widget> _screens=[
     NewTaskListScreen(),
     ProgressTaskListScreen(),
-    cancelTaskListScreen(),
+    CancelTaskListScreen(),
     DoneTaskListScreen(),
   ];
 

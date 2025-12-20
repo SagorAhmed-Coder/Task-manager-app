@@ -39,7 +39,12 @@ class _DoneTaskListScreenState extends State<DoneTaskListScreen> {
             shrinkWrap: true,
             itemCount: _doneTask.length,
             itemBuilder: (context, index) {
-              return TaskCard(taskModel: _doneTask[index],);
+              return TaskCard(
+                taskModel: _doneTask[index],
+                reFreshList: () {
+                  _getDoneTask();
+                },
+              );
             },
           ),
         )

@@ -3,7 +3,6 @@ import 'package:task_manager/data/model/task_model.dart';
 import 'package:task_manager/data/service/network_caller.dart';
 import 'package:task_manager/data/utils/urls.dart';
 import 'package:task_manager/ui/utils/snacbar_message.dart';
-
 import '../utils/task_card.dart';
 
 class ProgressTaskListScreen extends StatefulWidget {
@@ -39,7 +38,12 @@ class _ProgressTaskListScreenState extends State<ProgressTaskListScreen> {
           shrinkWrap: true,
           itemCount: _progressTask.length,
           itemBuilder: (context, index) {
-           return TaskCard(taskModel: _progressTask[index],);
+            return TaskCard(
+              taskModel: _progressTask[index],
+              reFreshList: () {
+                _getProgressTask();
+              },
+            );
           },
         ),
       )

@@ -6,14 +6,14 @@ import 'package:task_manager/ui/utils/snacbar_message.dart';
 import '../utils/task_card.dart';
 
 
-class cancelTaskListScreen extends StatefulWidget {
-  const cancelTaskListScreen({super.key});
+class CancelTaskListScreen extends StatefulWidget {
+  const CancelTaskListScreen({super.key});
 
   @override
-  State<cancelTaskListScreen> createState() => _cancelTaskListScreenState();
+  State<CancelTaskListScreen> createState() => _CancelTaskListScreenState();
 }
 
-class _cancelTaskListScreenState extends State<cancelTaskListScreen> {
+class _CancelTaskListScreenState extends State<CancelTaskListScreen> {
 
   bool _cancelTaskInProgress = false;
 
@@ -22,7 +22,7 @@ class _cancelTaskListScreenState extends State<cancelTaskListScreen> {
   @override
   void initState() {
     super.initState();
-    _getDoneTask();
+    _getCancelTask();
   }
 
   @override
@@ -39,14 +39,19 @@ class _cancelTaskListScreenState extends State<cancelTaskListScreen> {
             shrinkWrap: true,
             itemCount: _cancelTask.length,
             itemBuilder: (context, index) {
-              return TaskCard(taskModel: _cancelTask[index],);
+              return TaskCard(
+                taskModel: _cancelTask[index],
+                reFreshList: () {
+                  _getCancelTask();
+                },
+              );
             },
           ),
         )
     );
   }
 
-  Future<void> _getDoneTask()async{
+  Future<void> _getCancelTask()async{
     _cancelTaskInProgress = true;
     setState(() {});
     final NetworkResponse response = await NetworkCaller.getRequest(Urls.cancelTask);
