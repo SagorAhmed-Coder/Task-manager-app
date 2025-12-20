@@ -35,14 +35,18 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget{
         child: Row(
           spacing: 5,
           children: [
-            CircleAvatar(backgroundColor: Colors.white,radius: 24,),
+            CircleAvatar(
+              backgroundImage: NetworkImage('https://thumbs.dreamstime.com/b/young-indian-man-happy-outdoors-looking-camera-39595562.jpg'),
+              backgroundColor: Colors.white,
+              radius: 24,
+            ),
             Padding(
               padding: const EdgeInsets.only(bottom: 3),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Rahman Ali',style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white,fontSize: 20),),
-                  Text('sagorahmedyt07@gmail.com',style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),),
+                  Text(AuthController.user!.fullName,style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white,fontSize: 20),),
+                  Text(AuthController.user!.email,style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),),
                 ],
               ),
             )
