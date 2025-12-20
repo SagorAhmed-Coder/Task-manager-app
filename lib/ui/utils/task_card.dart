@@ -22,6 +22,7 @@ class TaskCard extends StatefulWidget {
 class _TaskCardState extends State<TaskCard> {
 
   bool _changeStatusInProgress = false;
+  bool _deleteTaskListInProgress = false;
 
 
   @override
@@ -44,14 +45,17 @@ class _TaskCardState extends State<TaskCard> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Colors.green,
+                      color: _changeStatusColor(widget.taskModel.status),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     padding: EdgeInsets.symmetric(vertical: 5,horizontal: 10),
                     child: Text(widget.taskModel.status,style: TextStyle(color: Colors.white,fontSize: 17),),
                   ),
                   Spacer(),
-                  IconButton(onPressed: (){}, icon: Icon(Icons.delete)),
+                  Visibility(
+                      visible: _deleteTaskListInProgress == false,
+                      replacement: Center(child: CircularProgressIndicator(),),
+                      child: IconButton(onPressed: _deleteTask, icon: Icon(Icons.delete))),
                   Visibility(
                       visible: _changeStatusInProgress == false,
                       replacement: Center(child: CircularProgressIndicator(),),
@@ -133,5 +137,33 @@ class _TaskCardState extends State<TaskCard> {
      }else{
        SnacbarMessage(context, 'Failed to load change progress');
      }
+  }
+
+  Color _changeStatusColor(String status){
+    switch(status){
+      case 'New':
+        return Colors.blue;
+      case 'Progress':
+        return Colors.yellow.shade700;
+      case 'Cancelled':
+        return Colors.red;
+      case 'Completed':
+        return Colors.green;
+      default:
+        return Colors.pink;
+    }
+  }
+  
+  Future<void> _deleteTask()async{
+    _deleteTaskListInProgress = true;
+    setState(() {});
+    final NetworkResponse response = await NetworkCaller.getRequest(Urls.deleteTask(widget.taskModel.id));
+    _deleteTaskListInProgress = false;
+    setState(() {});
+    if(response.isSuccess){
+      widget.reFreshList();
+    }else{
+      SnacbarMessage(context, 'Delete not working,try again');
+    }
   }
 }
